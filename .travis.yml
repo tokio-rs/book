@@ -1,5 +1,4 @@
 language: rust
-sudo: false
 
 os: linux
 rust: stable
@@ -13,10 +12,10 @@ script:
   - mdbook build
 
 deploy:
-  provider: pages
-  skip_cleanup: true
-  keep-history: false
-  local_dir: book/html
-  github_token: $GITHUB_API_KEY
+  provider: pages:git
+  edge: true
+  keep_history: false
+  local_dir: book
+  token: $GITHUB_API_KEY
   on:
     branch: master
