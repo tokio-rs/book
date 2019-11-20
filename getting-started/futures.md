@@ -1,10 +1,4 @@
----
-title: "Futures"
-weight : 1020
-menu:
-  docs:
-    parent: getting_started
----
+# Futures
 
 Let's take a closer look at futures. Tokio is built on top of the [`futures`] crate
 and uses its runtime model. This allows Tokio to interop with other libraries also

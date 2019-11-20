@@ -1,10 +1,4 @@
----
-title: "Runtime"
-weight : 1030
-menu:
-  docs:
-    parent: getting_started
----
+# Runtime
 
 In the previous section we explored Futures and Streams which allow us to represent
 a value (in the case of a `Future`) or a series of values (in the case of `Stream`)

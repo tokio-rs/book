@@ -1,10 +1,4 @@
----
-title: "Hello World!"
-weight : 1010
-menu:
-  docs:
-    parent: getting_started
----
+# Hello World!
 
 To kick off our tour of Tokio, we will start with the obligatory "hello world"
 example. This program will create a TCP stream and write "hello, world!" to the stream.

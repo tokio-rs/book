@@ -1,10 +1,4 @@
----
-title: "Example: An Echo Server"
-weight : 1040
-menu:
-  docs:
-    parent: getting_started
----
+# Example: An Echo Server
 
 We're going to use what has been covered so far to build an echo server. This is a
 Tokio application that incorporates everything we've learned so far. The server will
