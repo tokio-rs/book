@@ -1,8 +1,4 @@
----
-title: "What is Tokio?"
-weight: 1
-menu: "docs"
----
+![Tokio logo](./static/img/Tokio_Horizontal_Large.png)
 
 Tokio allows developers to write asynchronous programs in the Rust programming
 language. Instead of synchronously waiting for long-running operations (like reading

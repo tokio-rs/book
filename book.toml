@@ -1,0 +1,7 @@
+[book]
+authors = ["Tokio Developers"]
+language = "en"
+multilingual = false
+src = "./"
+title = "Tokio: Rust's Asynchronous Runtime"
+edition = "2018"
