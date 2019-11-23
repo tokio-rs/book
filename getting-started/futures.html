@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Futures - Tokio: Rust's Asynchronous Runtime</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="../overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">2.</strong> Getting started</a></li><li><ol class="section"><li class="expanded "><a href="../getting-started/hello-world.html"><strong aria-hidden="true">2.1.</strong> Hello World!</a></li><li class="expanded "><a href="../getting-started/futures.html" class="active"><strong aria-hidden="true">2.2.</strong> Futures</a></li><li class="expanded "><a href="../getting-started/runtime.html"><strong aria-hidden="true">2.3.</strong> Runtime</a></li><li class="expanded "><a href="../getting-started/echo.html"><strong aria-hidden="true">2.4.</strong> Example: An Echo Server</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Tokio: Rust's Asynchronous Runtime</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/tokio-rs/tokio" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#futures" id="futures">Futures</a></h1>
+<p>Let's take a closer look at futures. Tokio is built on top of <a href="https://doc.rust-lang.org/std/task"><code>task</code></a> and <a href="https://doc.rust-lang.org/std/future"><code>future</code></a> modules
+found in the Rust standard library, as well as on the <a href="https://docs.rs/futures"><code>futures</code></a> crate.
+This allows Tokio to interop with other libraries also built on the same foundation.</p>
+<p><strong>Note</strong>: This runtime model is very different than async libraries found in
+other languages. While, at a high level, APIs can look similar, the way code
+gets executed differs.</p>
+<p>We'll be taking a closer look at the runtime in the upcoming sections, but a
+basic understanding of the runtime is necessary to understand futures. To gain
+this understanding, we'll first look at the synchronous model that Rust uses by
+default and see how this differs from Tokio's asynchronous model.</p>
+<h1><a class="header" href="#synchronous-model" id="synchronous-model">Synchronous Model</a></h1>
+<p>First, let's talk briefly about the synchronous (or blocking) model that most of the
+Rust <a href="https://doc.rust-lang.org/std">standard library</a> uses.</p>
+<pre><pre class="playpen"><code class="language-rust edition2018"><span class="boring">use std::io::prelude::*;
+</span><span class="boring">use std::net::TcpStream;
+</span><span class="boring">fn dox(mut socket: TcpStream) {
+</span>// let socket = ...;
+let mut buf = [0; 1024];
+let n = socket.read(&amp;mut buf).unwrap();
+
+// Do something with &amp;buf[..n];
+<span class="boring">}
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<p>When <code>socket.read</code> is called, either the socket has pending data in its receive
+buffer or it does not. If there is pending data, the call to <code>read</code> will return
+immediately and <code>buf</code> will be filled with that data. However, if there is no
+pending data, the <code>read</code> function will block the current thread until data is
+received. Once the data is received, <code>buf</code> will be filled with this newly received
+data and the <code>read</code> function will return.</p>
+<p>In order to perform reads on many different sockets concurrently, a thread per
+socket is required. Using a thread per socket does not scale up very well to
+large numbers of sockets. This is known as the <a href="https://en.wikipedia.org/wiki/C10k_problem">c10k</a> problem.</p>
+<h1><a class="header" href="#non-blocking-sockets" id="non-blocking-sockets">Non-blocking sockets</a></h1>
+<p>The way to avoid blocking a thread when performing an operation like read is to
+not block the thread! Non-blocking sockets allow performing operations, like read,
+without blocking the thread. When the socket has no pending data in its receive
+buffer, the <code>read</code> function returns immediately, indicating that the socket was &quot;not
+ready&quot; to perform the read operation.</p>
+<p>When using a Tokio <a href="https://docs.rs/tokio/*/tokio/net/struct.TcpStream.html"><code>TcpStream</code></a>, a call to <code>read</code> will always immediately return
+a value (<a href="https://doc.rust-lang.org/std/io/enum.ErrorKind.html#variant.WouldBlock"><code>ErrorKind::WouldBlock</code></a>) even if there is no pending data to read.
+If there is no pending data, the caller is responsible for calling <code>read</code> again
+at a later time.  The trick is to know when that &quot;later time&quot; is.</p>
+<p>Another way to think about a non-blocking read is as 'polling' the socket for
+data to read.</p>
+<p>Futures are an abstraction around this polling model. A <code>Future</code> represents a value
+that will be available at &quot;some point in the future&quot;. We can poll the future and
+ask if the value is ready or not. Let's take a look in more detail.</p>
+<h1><a class="header" href="#a-closer-look-at-futures" id="a-closer-look-at-futures">A closer look at futures</a></h1>
+<p>A future is a value that represents the completion of an asynchronous
+computation. Usually, the future <em>completes</em> due to an event that happens
+elsewhere in the system. While we’ve been looking at things from the perspective
+of basic I/O, you can use a future to represent a wide range of events, e.g.:</p>
+<ul>
+<li>
+<p><strong>A database query</strong>, when the query finishes, the future is completed, and
+its value is the result of the query.</p>
+</li>
+<li>
+<p><strong>An RPC invocation</strong> to a server. When the server replies, the future is
+completed, and its value is the server’s response.</p>
+</li>
+<li>
+<p><strong>A timeout</strong>. When time is up, the future is completed, the value is an empty tuple
+<code>()</code> (also referred to as &quot;unit&quot; or &quot;the unit type&quot;).</p>
+</li>
+<li>
+<p><strong>A long-running CPU-intensive task</strong>, running on a thread pool. When the task
+finishes, the future is completed, and its value is the return value of the
+task.</p>
+</li>
+<li>
+<p><strong>Reading bytes from a socket</strong>. When the bytes are ready, the future is
+completed – and depending on the buffering strategy, the bytes might be
+returned directly, or written as a side-effect into some existing buffer.</p>
+</li>
+</ul>
+<p>The entire point of the future abstraction is to allow asynchronous functions,
+i.e., functions that cannot immediately return a value, to be able to return
+<strong>something</strong>.</p>
+<p>For example, an asynchronous HTTP client could provide a <code>get</code> function that
+looks like this:</p>
+<pre><code class="language-rust ignore">pub fn get(&amp;self, uri: &amp;str) -&gt; ResponseFuture { ... }
+</code></pre>
+<p>Then, the user of the library would use the function as so:</p>
+<pre><code class="language-rust ignore">let response_future = client.get(&quot;https://www.example.com&quot;);
+</code></pre>
+<p>Now, the <code>response_future</code> isn't the actual response. It is a future that will
+complete once the response is received. However, since the caller has a concrete
+<strong>value</strong> (the future), they can start to use it. For example, they may chain
+computations using combinators to perform once the response is received or they
+might pass the future to a function.</p>
+<pre><code class="language-rust ignore">let response_is_ok = response_future
+    .map_ok(|response| {
+        response.status().is_ok()
+    });
+
+track_response_success(response_is_ok);
+</code></pre>
+<p>None of those actions taken with the future perform any immediate work.
+They cannot because they don't have the actual HTTP response. Instead, they
+define the work to be done when the response future completes and the actual
+response is available.</p>
+<p>Both the <a href="https://docs.rs/futures"><code>futures</code></a> crate and Tokio come with a collection of combinator
+functions that can be used to work with futures. So far we've seen <code>and_then</code> which
+chains two <a href="https://docs.rs/futures"><code>futures</code></a> together, <code>then</code> which allows to chain a future to a previous
+one even if the previous one errored, and <code>map</code> which simply maps a future's value
+from one type to another.</p>
+<p>We'll be exploring more combinators later in this guide.</p>
+<h1><a class="header" href="#poll-based-futures" id="poll-based-futures">Poll based Futures</a></h1>
+<p>As hinted at earlier, Rust futures are poll based. This means that instead of a
+<code>Future</code> being responsible for pushing the data somewhere once it is complete, it
+relies on being asked whether it is complete or not.</p>
+<p>This is a unique aspect of the Rust future library. Most future libraries for other
+programming languages use a push based model where callbacks are supplied to the
+future and the computation invokes the callback immediately with the computation
+result.</p>
+<p>Using a poll based model offers <a href="https://aturon.github.io/blog/2016/09/07/futures-design/">many advantages</a>, including being a zero cost
+abstraction, i.e., using Rust futures has no added overhead compared to writing
+the asynchronous code by hand.</p>
+<p>We'll take a closer look at this poll based model in the next section.</p>
+<h2><a class="header" href="#the-future-trait" id="the-future-trait">The Future trait</a></h2>
+<p>The <code>Future</code> trait is as follows:</p>
+<pre><code class="language-rust ignore">trait Future {
+    /// The type of the value returned when the future completes.
+    type Output;
+
+    /// The function that will be repeatedly called to see if the future
+    /// has completed or not
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context) -&gt; Poll&lt;Self::Output&gt;;
+}
+</code></pre>
+<p>For now it's just important to know that futures have an associated type: <code>Output</code>.
+This is the type of the value that the <code>Future</code> will yield when it completes.</p>
+<p>Additionally, <code>Future</code>s have one method, named <code>poll</code>. We won't go into too much detail
+about <code>poll</code> in this section since you don't need to know about <code>poll</code> to use
+futures with async/await. The only thing to be aware for now is that <code>poll</code> is
+what the runtime will call in order to see if the <code>Future</code> is complete yet or not.
+If you're curious: <a href="https://doc.rust-lang.org/std/task/enum.Poll.html"><code>Poll</code></a> is an enum with values <code>Ready(Item)</code> or <code>Pending</code> which
+informs the runtime of if the future is complete or not.</p>
+<p>In a future section, we'll be implementing a <code>Future</code> from scratch including writing
+a poll function that properly informs the runtime when the future is complete.</p>
+<h2><a class="header" href="#streams" id="streams">Streams</a></h2>
+<p>Streams are the iterator equivalent of futures. Instead of yielding a value at some
+point in the future, streams yield a collection of values each at some point in the
+future. In other words, streams don't yield just one value at one point in the
+future like futures do. They rather keep yielding values over time.</p>
+<p>Just like futures, you can use streams to represent a wide range of things as long
+as those things produce discrete values at different points sometime in the future.
+For instance:</p>
+<ul>
+<li><strong>UI Events</strong> caused by the user interacting with a GUI in different ways. When an
+event happens the stream yields a different message to your app over time.</li>
+<li><strong>Push Notifications from a server</strong>. Sometimes a request/response model is not
+what you need. A client can establish a notification stream with a server to be
+able to receive messages from the server without specifically being requested.</li>
+<li><strong>Incoming socket connections</strong>. As different clients connect to a server, the
+connections stream will yield socket connections.</li>
+</ul>
+<p>Streams are very similar to futures in their implementation:</p>
+<pre><code class="language-rust ignore">trait Stream {
+    /// The type of the value yielded by the stream.
+    type Item;
+
+    /// The function that will be repeatedly called to see if the stream has
+    /// another value it can yield
+    fn poll_next(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context) -&gt; Poll&lt;Option&lt;Self::Item&gt;&gt;
+}
+</code></pre>
+<p>Streams come with their own set of combinators and will be covered in more depth
+in the <strong>Working with futures</strong> section.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../getting-started/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../getting-started/runtime.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../getting-started/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../getting-started/runtime.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,11 @@
+[book]
+authors = ["Tokio Developers"]
+language = "en"
+multilingual = false
+src = "./"
+title = "Tokio: Rust's Asynchronous Runtime"
+edition = "2018"
+
+[output.html]
+git-repository-url = "https://github.com/tokio-rs/tokio"
+git-repository-icon = "fa-github"

@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hello World! - Tokio: Rust's Asynchronous Runtime</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="../overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="../getting-started/hello-world.html" class="active"><strong aria-hidden="true">2.</strong> Getting started</a></li><li><ol class="section"><li class="expanded "><a href="../getting-started/hello-world.html" class="active"><strong aria-hidden="true">2.1.</strong> Hello World!</a></li><li class="expanded "><a href="../getting-started/futures.html"><strong aria-hidden="true">2.2.</strong> Futures</a></li><li class="expanded "><a href="../getting-started/runtime.html"><strong aria-hidden="true">2.3.</strong> Runtime</a></li><li class="expanded "><a href="../getting-started/echo.html"><strong aria-hidden="true">2.4.</strong> Example: An Echo Server</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Tokio: Rust's Asynchronous Runtime</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/tokio-rs/tokio" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#hello-world" id="hello-world">Hello World!</a></h1>
+<p>To kick off our tour of Tokio, we will start with the obligatory &quot;hello world&quot;
+example. This program will create a TCP stream and write &quot;hello, world!&quot; to the stream.
+The difference between this and a Rust program that writes to a TCP stream without Tokio
+is that this program won't block program execution when the stream is created or when
+our &quot;hello, world!&quot; message is written to the stream.</p>
+<p>Before we begin you should have a very basic understanding of how TCP streams work. Having
+an understanding of Rust’s <a href="https://doc.rust-lang.org/std/net/struct.TcpStream.html">standard library implementation</a>
+is also helpful.</p>
+<p>Let's get started.</p>
+<p>First, generate a new crate.</p>
+<pre><code class="language-bash">$ cargo new hello-world
+$ cd hello-world
+</code></pre>
+<p>Next, add the necessary dependencies in <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+tokio = &quot;0.2.0-alpha&quot;
+</code></pre>
+<p>We are going to use Tokio's own <a href="https://docs.rs/tokio/*/tokio/net/index.html"><code>net</code></a> module. This module provides the same
+abstractions over networking and I/O-operations as the corresponding module in <code>std</code>
+with a small difference: all actions are performed asynchronously.</p>
+<h1><a class="header" href="#creating-the-stream" id="creating-the-stream">Creating the stream</a></h1>
+<p>The first step is to create the <code>TcpStream</code>. We use the <code>TcpStream</code> implementation
+provided by Tokio.</p>
+<pre><pre class="playpen"><code class="language-rust edition2018">use tokio::net::TcpStream;
+
+fn main() {
+    let addr = &quot;127.0.0.1:6142&quot;;
+    let client = TcpStream::connect(addr);
+
+    // Following snippets come here...
+}
+</code></pre></pre>
+<p>Next, we'll add some to the <code>client</code> <code>TcpStream</code>. This asynchronous task now creates
+the stream and then yields it once it's been created for additional processing.</p>
+<pre><pre class="playpen"><code class="language-rust edition2018"><span class="boring">use tokio::net::TcpStream;
+</span>
+<span class="boring">fn main() {
+</span>let addr = &quot;127.0.0.1:6142&quot;;
+let client = TcpStream::connect(addr);
+
+let future = async move {
+  // TcpStream::connect future has an Output type of io::Result&lt;TcpStream&gt;
+  match client.await {
+    Ok(_stream) =&gt; {
+      println!(&quot;created stream&quot;);
+
+      // Process stream here.
+    }
+    Err(err) =&gt; {
+      // In our example, we are only going to log the error to STDOUT.
+      println!(&quot;connection error = {:?}&quot;, err);
+    }
+  };
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>The call to <code>TcpStream::connect</code> returns a <a href="https://docs.rs/futures-preview/*/futures-preview/future/trait.Future.html"><code>Future</code></a> of the created TCP stream.
+We'll learn more about <a href="/docs/getting-started/futures/"><code>Futures</code></a> later in the guide, but for now you can think of
+a <a href="https://docs.rs/futures-preview/*/futures-preview/future/trait.Future.html"><code>Future</code></a> as a value that represents something that will eventually happen in the
+future (in this case the stream will be created). This means that <code>TcpStream::connect</code> does
+not wait for the stream to be created before it returns. Rather, it returns immediately
+with a value representing the work of creating a TCP stream.</p>
+<p>Note the <code>async</code> block that follows. Like the <code>TcpStream::connect</code> future,
+the contents of the <code>async</code> block are not executed immediately.
+Instead, they are stored in an object whose result can be computed later.
+Inside the <code>async</code> block we can <code>await</code> the created future, so that any code that follows
+is executed with the result of the <code>await</code>-ed <a href="https://docs.rs/futures-preview/*/futures-preview/future/trait.Future.html"><code>Future</code></a>'s computation.</p>
+<p>We will be digging more into futures (and the related concepts of streams and sinks) later on.</p>
+<p>Next, we will process the stream.</p>
+<h1><a class="header" href="#writing-data" id="writing-data">Writing data</a></h1>
+<p>Our goal is to write <code>&quot;hello world\n&quot;</code> to the stream.</p>
+<p>Going back to the <code>async</code> block in the previous example:</p>
+<pre><pre class="playpen"><code class="language-rust edition2018">use tokio::io::AsyncWriteExt;
+use tokio::net::TcpStream;
+
+fn main() {
+    let addr = &quot;127.0.0.1:6142&quot;;
+    let client = TcpStream::connect(addr);
+
+    let future = async move {
+        if let Ok(mut stream) = client.await {
+            println!(&quot;created stream&quot;);
+
+            let result = stream.write_all(b&quot;hello world\n&quot;).await;
+
+            println!(&quot;wrote to stream; success={:?}&quot;, result.is_ok());
+        }
+    };
+}
+</code></pre></pre>
+<p>The [<code>AsyncWriteExt::write_all</code>] trait method takes <code>stream</code> by mutable reference,
+<a href="https://docs.rs/futures-preview/*/futures-preview/future/trait.Future.html"><code>Future</code></a> that completes once the entire message has been written to the
+stream. In our example, we <code>await</code> for the completion of said future and just
+write a message to <code>STDOUT</code> indicating that the write has completed.</p>
+<p>Note that <code>result</code> is a <code>Result</code> that contains the original stream (compare to
+<code>and_then</code>, which passes the stream without the <code>Result</code> wrapper). This allows us
+to sequence additional reads or writes to the same stream. However, we have
+nothing more to do, so we just drop the stream, which automatically closes it.</p>
+<h1><a class="header" href="#running-the-client-task" id="running-the-client-task">Running the client task</a></h1>
+<p>So far we have a <code>Future</code> representing the work to be done by our program, but we
+have not actually run it. We need a way to 'spawn' that work. We need an executor.</p>
+<p>Executors are responsible for scheduling asynchronous tasks, driving them to
+completion. There are a number of executor implementations to choose from, each have
+different pros and cons. In this example, we will use the default executor of the
+<a href="https://docs.rs/tokio/*/tokio/runtime/index.html">Tokio runtime</a>.</p>
+<pre><pre class="playpen"><code class="language-rust edition2018">use tokio::io::AsyncWriteExt;
+use tokio::net::TcpStream;
+
+#[tokio::main]
+async fn main() {
+    let addr = &quot;127.0.0.1:6142&quot;;
+    let client = TcpStream::connect(addr);
+
+    if let Ok(mut stream) = client.await {
+        println!(&quot;created stream&quot;);
+
+        let result = stream.write_all(b&quot;hello world\n&quot;).await;
+
+        println!(&quot;wrote to stream; success={:?}&quot;, result.is_ok());
+    }
+}
+</code></pre></pre>
+<p>Notice how <code>main()</code> has become an <code>async</code> function. It is equivalent to placing all its code inside an <code>async</code> block.</p>
+<p>If we rewrite this example in full, without the procedural macro:</p>
+<pre><pre class="playpen"><code class="language-rust edition2018">use tokio::io::AsyncWriteExt;
+use tokio::net::TcpStream;
+use tokio::runtime::Runtime;
+
+fn main() {
+    let addr = &quot;127.0.0.1:6142&quot;;
+    let client = TcpStream::connect(addr);
+
+    let future = async move {
+        if let Ok(mut stream) = client.await {
+            println!(&quot;created stream&quot;);
+
+            let result = stream.write_all(b&quot;hello world\n&quot;).await;
+
+            println!(&quot;wrote to stream; success={:?}&quot;, result.is_ok());
+        }
+    };
+
+    let rt = Runtime::new().unwrap();
+    println!(&quot;About to create the stream and write to it...&quot;);
+    rt.block_on(future);
+    println!(&quot;Stream has been created and written to.&quot;);
+}
+</code></pre></pre>
+<p>In this case we create the default runtime, and spawn the task onto it, blocking the current thread until all spawned tasks
+have completed and all resources (like files and sockets) have been dropped.</p>
+<p>So far, we only have a single task running on the executor, so the <code>client</code> task
+is the only one blocking <code>run</code> from returning. Once <code>run</code> has returned we can be sure
+that our Future has been run to completion.</p>
+<p>You can find the full example <a href="https://github.com/tokio-rs/tokio/blob/master/examples/hello_world.rs">here</a>.</p>
+<h1><a class="header" href="#running-the-code" id="running-the-code">Running the code</a></h1>
+<p><a href="http://netcat.sourceforge.net/">Netcat</a> is a tool for quickly creating TCP sockets from the command line. The following
+command starts a listening TCP socket on the previously specified port.</p>
+<pre><code class="language-bash">$ nc -l -p 6142
+</code></pre>
+<blockquote>
+<p>The command above is used with the GNU version of netcat that comes stock on many
+unix based operating systems. The following command can be used with the
+<a href="https://nmap.org">NMap.org</a> version: <code>$ ncat -l -p 6142</code></p>
+</blockquote>
+<p>In a different terminal we'll run our project.</p>
+<pre><code class="language-bash">$ cargo run
+</code></pre>
+<p>If everything goes well, you should see <code>hello world</code> printed from Netcat.</p>
+<h1><a class="header" href="#next-steps" id="next-steps">Next steps</a></h1>
+<p>We've only dipped our toes into Tokio and its asynchronous model. The next page in
+the guide will start digging a bit deeper into Futures and the Tokio runtime model.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../overview.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../getting-started/hello-world.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../overview.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../getting-started/hello-world.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

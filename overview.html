@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Overview - Tokio: Rust's Asynchronous Runtime</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="overview.html" class="active"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="getting-started/hello-world.html"><strong aria-hidden="true">2.</strong> Getting started</a></li><li><ol class="section"><li class="expanded "><a href="getting-started/hello-world.html"><strong aria-hidden="true">2.1.</strong> Hello World!</a></li><li class="expanded "><a href="getting-started/futures.html"><strong aria-hidden="true">2.2.</strong> Futures</a></li><li class="expanded "><a href="getting-started/runtime.html"><strong aria-hidden="true">2.3.</strong> Runtime</a></li><li class="expanded "><a href="getting-started/echo.html"><strong aria-hidden="true">2.4.</strong> Example: An Echo Server</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Tokio: Rust's Asynchronous Runtime</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/tokio-rs/tokio" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><img src="./static/img/Tokio_Horizontal_Large.png" alt="Tokio logo" /></p>
+<p>Tokio allows developers to write asynchronous programs in the Rust programming
+language. Instead of synchronously waiting for long-running operations (like reading
+a file or waiting for a timer to complete) before moving on to the next thing,
+Tokio allows developers to write programs where execution continues while the
+long-running operations are in progress.</p>
+<p>More specifically, Tokio is an event-driven, non-blocking I/O platform
+for writing asynchronous applications with Rust. At a high level, it
+provides a few major components:</p>
+<ul>
+<li>A multithreaded, work-stealing based task <a href="https://tokio-rs.github.io/tokio/tokio/runtime/index.html">scheduler</a>.</li>
+<li>A <a href="https://docs.rs/tokio/0.1/tokio/reactor/index.html">reactor</a> backed by the operating system's event queue (epoll, kqueue,
+IOCP, etc...).</li>
+<li>Asynchronous <a href="https://docs.rs/tokio/0.1/tokio/net/index.html">TCP and UDP</a> sockets.</li>
+</ul>
+<p>These components provide the runtime components necessary for building
+an asynchronous application.</p>
+<h1><a class="header" href="#fast" id="fast">Fast</a></h1>
+<p>Tokio is built on the Rust programming language, which is itself very
+fast. Applications built with Tokio will get those same benefits. Tokio's design
+is also geared towards enabling applications to be as fast as possible.</p>
+<h2><a class="header" href="#zero-cost-abstractions" id="zero-cost-abstractions">Zero-cost abstractions</a></h2>
+<p>Tokio is built around [futures]. Futures aren't a new idea, but the way Tokio
+uses them is [unique][poll]. Unlike futures from other languages, Tokio's
+futures compile down to a state machine. There is no added overhead from
+synchronization, allocation, or other costs common with future implementations.</p>
+<p>Note that providing zero-cost abstractions does not mean that Tokio itself has
+no cost. It means that using Tokio results in an end product with equivalent
+overhead to not using Tokio.</p>
+<p>[poll]: {{&lt; ref &quot;/docs/getting-started/futures.md&quot; &gt;}}#poll-based-futures
+[futures]: {{&lt; ref &quot;/docs/getting-started/futures.md&quot; &gt;}}</p>
+<h2><a class="header" href="#concurrency" id="concurrency">Concurrency</a></h2>
+<p>Out of the box, Tokio provides a multi-threaded, <a href="https://en.wikipedia.org/wiki/Work_stealing">work-stealing</a>, scheduler. So,
+when you start the Tokio runtime, you are already using all of your computer's
+CPU cores.</p>
+<p>Modern computers increase their performance by adding cores, so being able to
+utilize many cores is critical for writing fast applications.</p>
+<h2><a class="header" href="#non-blocking-io" id="non-blocking-io">Non-blocking I/O</a></h2>
+<p>When hitting the network, Tokio will use the most efficient system available to
+the operating system. On Linux this means <a href="http://man7.org/linux/man-pages/man7/epoll.7.html">epoll</a>, bsd platforms provide <a href="https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2">kqueue</a>,
+and Windows has <a href="https://docs.microsoft.com/en-us/windows/desktop/fileio/i-o-completion-ports">I/O completion ports</a>.</p>
+<p>This allows multiplexing many sockets on a single thread and receiving
+operating system notifications in batches, thus reducing system calls. All this
+leads to less overhead for the application.</p>
+<h1><a class="header" href="#reliable" id="reliable">Reliable</a></h1>
+<p>While Tokio cannot prevent all bugs, it is designed to minimize them. It does
+this by providing APIs that are hard to misuse. At the end of the day, you can
+ship applications to production with confidence.</p>
+<h2><a class="header" href="#ownership-and-type-system" id="ownership-and-type-system">Ownership and type system</a></h2>
+<p>Rust's ownership model and type system enables implementing system level
+applications without the fear of memory unsafety. It prevents classic bugs
+such as accessing uninitialized memory and use after free. It does this without
+adding any run-time overhead.</p>
+<p>Further, APIs are able to leverage the type system to provide hard to misuse
+APIs. For example, <code>Mutex</code> does not require the user to explicitly unlock.</p>
+<h2><a class="header" href="#backpressure" id="backpressure">Backpressure</a></h2>
+<p>In push based systems, when a producer produces data faster than the consumer
+can process, data will start backing up. Pending data is stored in memory.
+Unless the producer stops producing, the system will eventually run out of
+memory and crash. The ability for a consumer to inform the producer to slow down
+is backpressure.</p>
+<p>Because Tokio uses a [poll] based model, the problem mostly just goes away.
+Producers are lazy by default. They will not produce any data unless the
+consumer asks them to. This is built into Tokio's foundation.</p>
+<h2><a class="header" href="#cancellation" id="cancellation">Cancellation</a></h2>
+<p>Because of Tokio's [poll] based model, computations do no work unless they are
+polled. Dependents of that computation hold a [future][futures] representing the
+result of that computation. If the result is no longer needed, the future is
+dropped. At this point, the computation will no longer be polled and thus
+perform no more work.</p>
+<p>Thanks to Rust's ownership model, the computation is able to implement <code>drop</code>
+handles to detect the future being dropped. This allows it to perform any
+necessary cleanup work.</p>
+<h1><a class="header" href="#lightweight" id="lightweight">Lightweight</a></h1>
+<p>Tokio scales well without adding overhead to the application, allowing it to
+thrive in resource constrained environments.</p>
+<h2><a class="header" href="#no-garbage-collector" id="no-garbage-collector">No garbage collector</a></h2>
+<p>Because Tokio is built on Rust, the compiled executable includes minimal
+language run-time. The end product is similar to what C++ would produce. This
+means, no garbage collector, no virtual machine, no JIT compilation, and no
+stack manipulation. Write your server applications without fear of
+<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)#Disadvantages">stop-the-world</a> pauses.</p>
+<p>It is possible to use Tokio without incurring any runtime allocations, making it
+a good fit for <a href="https://en.wikipedia.org/wiki/Real-time_computing">real-time</a> use cases.</p>
+<h2><a class="header" href="#modular" id="modular">Modular</a></h2>
+<p>While Tokio provides a lot out of the box, it is all organized very modularly.
+Each component lives in a separate library. If needed, applications may opt to
+pick and choose the needed components and avoid pulling in the rest.</p>
+<p>Tokio leverages <a href="https://github.com/tokio-rs/mio"><code>mio</code></a> for the system event queue and <a href="https://docs.rs/futures/*/futures/"><code>futures</code></a> for defining
+tasks.  Tokio implements <a href="https://tokio.rs/blog/2018-08-async-await/">async</a> syntax to improve readability of futures.
+<a href="https://crates.io/crates/tokio/reverse_dependencies">Many</a> libraries are implemented using Tokio, including <a href="https://hyper.rs/guides/"><code>hyper</code></a> and <a href="https://actix.rs/book/actix/"><code>actix</code></a>.</p>
+<h1><a class="header" href="#example" id="example">Example</a></h1>
+<p>A basic TCP echo server with Tokio:</p>
+<pre><pre class="playpen"><code class="language-rust edition2018">use tokio::net::TcpListener;
+use tokio::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    // Bind the server's socket.
+    let addr = &quot;127.0.0.1:12345&quot;;
+    let mut incoming = TcpListener::bind(&amp;addr)
+        .await
+        .expect(&quot;unable to bind TCP listener&quot;)
+        .incoming();
+
+    // Pull out a stream of sockets for incoming connections
+    while let Some(conn) = incoming.next().await {
+        match conn {
+            Err(e) =&gt; eprintln!(&quot;accept failed = {:?}&quot;, e),
+            Ok(mut sock) =&gt; {
+                // Spawn the future that echos the data and returns how
+                // many bytes were copied as a concurrent task.
+                tokio::spawn(async move {
+                    // Split up the reading and writing parts of the
+                    // socket.
+                    let (mut reader, mut writer) = sock.split();
+
+                    match reader.copy(&amp;mut writer).await {
+                        Ok(amt) =&gt; {
+                            println!(&quot;wrote {:} bytes&quot;, amt);
+                        }
+                        Err(err) =&gt; {
+                            eprintln!(&quot;IO error {:?}&quot;, err);
+                        }
+                    }
+                });
+            }
+        }
+    }
+}
+</code></pre></pre>
+<p>More examples can be found <a href="https://github.com/tokio-rs/tokio/tree/master/examples">here</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+                            <a rel="next" href="getting-started/hello-world.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+                    <a href="getting-started/hello-world.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
