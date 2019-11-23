@@ -1,0 +1,17 @@
+[package]
+name = "doc-test"
+version = "0.1.0"
+edition = "2018"
+build = "build.rs"
+publish = false
+
+[dependencies]
+futures-preview = "0.3.0-alpha"
+tokio = "0.2.0-alpha"
+bytes = "0.4"
+
+[build-dependencies]
+skeptic = { git = "https://github.com/vorot93/rust-skeptic", branch = "readable-filename" }
+
+[dev-dependencies]
+skeptic = { git = "https://github.com/vorot93/rust-skeptic", branch = "readable-filename" }
